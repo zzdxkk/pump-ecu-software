@@ -1,9 +1,11 @@
 # 汽车电子泵控制 ECU 软件模块实践
 
+[![build-and-test](https://github.com/zzdxkk/pump-ecu-software/actions/workflows/ci.yml/badge.svg)](https://github.com/zzdxkk/pump-ecu-software/actions/workflows/ci.yml)
+
 三个可以独立编译、独立测试的 C 模块，覆盖汽车嵌入式软件开发中最常被问到的一类工作：
 **模块设计 → 单元测试 → 集成测试 → 边界条件验证**。
 
-不是演示工程，每个模块都有对应的故障场景和边界用例；`./run_all.sh` 一条命令跑完 316 项断言。
+不是演示工程，每个模块都有对应的故障场景和边界用例；`./run_all.sh` 一条命令跑完 316 项断言，详细结果见 [docs/test-report.md](docs/test-report.md)。
 
 ## 模块
 
@@ -65,5 +67,7 @@ cd 03-pump-fsm && make test   # 单独跑某一个
 01-can-codec/{include,src,tests}   can_codec.h / can_codec.c / test_can_codec.c
 02-uds-diagnostics/{include,src,tests}
 03-pump-fsm/{include,src,tests}
+docs/test-report.md                测试报告（分组、风险等级、残余风险）
+.github/workflows/ci.yml           gcc + clang 双编译器 CI
 run_all.sh
 ```

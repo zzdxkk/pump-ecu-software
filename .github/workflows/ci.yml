@@ -1,0 +1,26 @@
+name: build-and-test
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    name: test (${{ matrix.cc }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        cc: [ gcc, clang ]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Show toolchain
+        run: ${{ matrix.cc }} --version | head -1 && make --version | head -1
+      - name: Run all module tests
+        env:
+          CC: ${{ matrix.cc }}
+        run: |
+          chmod +x ./run_all.sh
+          ./run_all.sh
